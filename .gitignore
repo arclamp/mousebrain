@@ -1,3 +1,6 @@
 *.swp
 data/test.csv
 venv
+build
+node_modules
+package-lock.json
