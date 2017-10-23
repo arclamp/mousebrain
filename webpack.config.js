@@ -10,6 +10,26 @@ module.exports = {
     path: path.resolve('build'),
     filename: 'index.js'
   },
+  module: {
+    rules: [
+      {
+        test: /\/data\/test\.csv$/,
+        use: 'raw-loader'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015']
+            }
+          }
+        ]
+      }
+    ]
+  },
   plugins: [
     new HtmlPlugin({
       template: './src/index.template.ejs',
