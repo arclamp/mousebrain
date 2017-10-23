@@ -1,0 +1,21 @@
+{
+  "name": "mousebrain",
+  "version": "0.1.0",
+  "description": "Experiments in visualizing mouse brain traces using Candela and JupyterLab",
+  "main": "index.js",
+  "scripts": {
+    "virtualenv": "virtualenv venv",
+    "data": "./venv/bin/python data/gendata.py -c 4 -f 50000 >data/test.csv",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronichoudhury-work/mousebrain.git"
+  },
+  "author": "Roni Choudhury",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ronichoudhury-work/mousebrain/issues"
+  },
+  "homepage": "https://github.com/ronichoudhury-work/mousebrain#readme"
+}
