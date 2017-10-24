@@ -7,6 +7,7 @@
     "virtualenv": "virtualenv venv",
     "data": "./venv/bin/python data/gendata.py -c 4 -f 50000 >data/test.csv",
     "build": "webpack",
+    "lint": "semistandard | snazzy",
     "watch": "webpack --watch",
     "serve": "cd build && ../venv/bin/python -m SimpleHTTPServer ${PORT-8000}"
   },
@@ -27,6 +28,8 @@
     "html-webpack-plugin": "^2.30.1",
     "papaparse": "^4.3.6",
     "raw-loader": "^0.5.1",
+    "semistandard": "^11.0.0",
+    "snazzy": "^7.0.0",
     "webpack": "^3.8.1"
   }
 }
