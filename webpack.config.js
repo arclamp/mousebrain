@@ -28,6 +28,14 @@ module.exports = candelaPlugins({
             }
           }
         ]
+      },
+      {
+        test: /\.jade$/,
+        use: [
+          {
+            loader: 'pug-loader'
+          }
+        ]
       }
     ]
   },

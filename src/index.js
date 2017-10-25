@@ -1,10 +1,13 @@
 import Papa from 'papaparse';
-import candela from 'candela';
-import 'candela/plugins/vega/load';
+import { select } from 'd3-selection';
 
-import { MouseBrain } from './vis/mousebrain';
+import { Mousebrain } from './vis/Mousebrain';
 
 import testDataRaw from '../data/test.csv';
+import content from './index.jade';
+
+select(document.body)
+  .html(content());
 
 function zip (x, y) {
   if (x.length !== y.length) {
@@ -36,10 +39,10 @@ console.log('testData', testData);
 const fusedTestData = fuse(testData.data);
 console.log('fused testData', fusedTestData);
 
-const vis = new candela.components.LineChart(document.body, {
-  data: fusedTestData.slice(100),
-  x: 'Frame',
-  y: 'Cell 0',
+const mbDiv = select('div.mousebrain').node();
+
+const vis = new Mousebrain(mbDiv, {
+  data: fusedTestData,
   width: 960,
   height: 540
 });
