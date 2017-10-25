@@ -3,7 +3,7 @@ import { select } from 'd3-selection';
 
 import { Mousebrain } from './vis/Mousebrain';
 
-import testDataRaw from '../data/test.csv';
+import testDataRaw from '../data/mb-data.csv';
 import content from './index.jade';
 
 select(document.body)

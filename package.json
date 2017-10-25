@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "virtualenv": "virtualenv venv",
-    "data": "./venv/bin/python data/gendata.py -c 4 -f 50000 >data/test.csv",
+    "data": "./venv/bin/python data/gendata.py -c 4 -f 50000 -e 8 -o data/mb",
     "build": "webpack",
     "lint": "semistandard | snazzy",
     "watch": "webpack --watch",

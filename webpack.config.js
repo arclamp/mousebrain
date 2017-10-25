@@ -14,7 +14,7 @@ module.exports = candelaPlugins({
   module: {
     rules: [
       {
-        test: /\/data\/test\.csv$/,
+        test: /\/data\/.*\.csv$/,
         use: 'raw-loader'
       },
       {
