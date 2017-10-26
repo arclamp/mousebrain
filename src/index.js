@@ -3,8 +3,8 @@ import { select } from 'd3-selection';
 
 import { Mousebrain } from './vis/Mousebrain';
 
-import dataRaw from '../data/mb-data.csv';
-import epochRaw from '../data/mb-epoch.csv';
+import dataRaw from '../data/small-data.csv';
+import epochRaw from '../data/small-epoch.csv';
 import content from './index.jade';
 
 select(document.body)
