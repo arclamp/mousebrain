@@ -2,6 +2,7 @@ import Papa from 'papaparse';
 import { select } from 'd3-selection';
 
 import { Mousebrain } from './vis/Mousebrain';
+import { NumberInput } from './util/NumberInput';
 
 import dataRaw from '../data/small-data.csv';
 import epochRaw from '../data/small-epoch.csv';
@@ -51,3 +52,18 @@ const vis = new Mousebrain(mbDiv, {
   height: 540
 });
 vis.render();
+
+const frameDiv = select('div.frame').node();
+const frameInput = new NumberInput(frameDiv, {
+  frames: data.length
+});
+
+frameInput.on('frame', f => {
+  vis.setDrilldown(f);
+  vis.render();
+});
+
+window.drill = (x) => {
+  vis.setDrilldown(x);
+  vis.render();
+};
