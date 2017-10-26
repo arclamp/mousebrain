@@ -35,7 +35,6 @@ class EpochChart extends VisComponent {
       .getBoundingClientRect()
       .width;
 
-
     let sel = select(this.el)
       .selectAll('div.frac')
       .data(this.epochs);
@@ -67,6 +66,63 @@ class EpochChart extends VisComponent {
   }
 }
 
+class MousebrainLineChart extends LineChart {
+  constructor (el, options) {
+    super(el, options);
+
+    this.frames = options.data.length;
+    this.drilldown = 0;
+    this.drilldownWidth = 2;
+
+    this.width = options.width;
+  }
+
+  generateSpec () {
+    const orig = super.generateSpec();
+    // return orig;
+    return {
+      $schema: orig.$schema,
+      data: orig.data,
+      width: orig.width,
+      height: orig.height,
+      layer: [
+        Object.assign(orig, {
+          width: undefined,
+          height: undefined
+        }),
+        {
+          mark: 'rule',
+          data: {
+            values: [
+              {
+                drilldown: this.drilldown + this.drilldownWidth / 2
+              }
+            ]
+          },
+          encoding: {
+            x: {
+              field: 'drilldown',
+              axis: {
+                title: 'Frame'
+              }
+            },
+            size: {
+              value: this.drilldownWidth
+            },
+            color: {
+              value: 'black'
+            }
+          }
+        }
+      ]
+    };
+  }
+
+  setDrilldown (frame) {
+    this.drilldown = clamp(frame, 0, this.frames);
+  }
+}
+
 export class Mousebrain extends VisComponent {
   constructor (el, options) {
     super(el);
@@ -82,7 +138,7 @@ export class Mousebrain extends VisComponent {
       .select('div.data')
       .node();
 
-    this.dataVis = new LineChart(dataDiv, {
+    this.dataVis = new MousebrainLineChart(dataDiv, {
       data: options.channelData,
       x: 'Frame',
       y: 'Cell 0',
@@ -115,6 +171,7 @@ export class Mousebrain extends VisComponent {
   setDrilldown (frame) {
     this.drilldown = frame;
 
+    this.dataVis.setDrilldown(frame);
     this.epochVis.setDrilldown(frame);
   }
 }
