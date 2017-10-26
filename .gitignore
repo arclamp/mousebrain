@@ -1,5 +1,5 @@
 *.swp
-data/test.csv
+data/*.csv
 venv
 build
 node_modules

@@ -14,7 +14,7 @@ module.exports = candelaPlugins({
   module: {
     rules: [
       {
-        test: /\/data\/test\.csv$/,
+        test: /\/data\/.*\.csv$/,
         use: 'raw-loader'
       },
       {
@@ -26,6 +26,14 @@ module.exports = candelaPlugins({
             options: {
               presets: ['es2015']
             }
+          }
+        ]
+      },
+      {
+        test: /\.jade$/,
+        use: [
+          {
+            loader: 'pug-loader'
           }
         ]
       }
