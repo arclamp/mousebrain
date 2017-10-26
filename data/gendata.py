@@ -29,14 +29,15 @@ def main():
     # Place some random spikes in the data.
     for c in xrange(args.cells):
         # Compute how many spikes to place.
-        spikes = int(random.normalvariate(10, 3) * args.frames / 50000)
+        spikes = int(random.normalvariate(10, 3))
 
         # Generate the locations of the spikes.
         locations = random.sample(xrange(args.frames), spikes)
 
         # Place the spikes.
         for loc in locations:
-            width = int(random.normalvariate(50, 10))
+            mid = max(5, args.frames / 1000)
+            width = int(random.normalvariate(mid, mid / 5))
             low, high = (max(loc - width, 0), min(loc + width, args.frames))
             height = random.uniform(0.5, 2.0)
             for j in xrange(low, high):
