@@ -6,7 +6,7 @@ import LineChart from 'candela/plugins/vega/LineChart';
 
 import template from './index.jade';
 
-function clamp(val, low, high) {
+function clamp (val, low, high) {
   return val < low ? low : (val > high ? high : val);
 }
 
