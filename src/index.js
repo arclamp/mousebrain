@@ -3,7 +3,8 @@ import { select } from 'd3-selection';
 
 import { Mousebrain } from './vis/Mousebrain';
 
-import testDataRaw from '../data/mb-data.csv';
+import dataRaw from '../data/mb-data.csv';
+import epochRaw from '../data/mb-epoch.csv';
 import content from './index.jade';
 
 select(document.body)
@@ -30,19 +31,22 @@ function fuse (table) {
   return table.slice(1).map(row => zip(headers, row));
 }
 
-const testData = Papa.parse(testDataRaw, {
-  dynamicTyping: true,
-  skipEmptyLines: true
-});
-console.log('testData', testData);
+function parse (raw) {
+  const rows = Papa.parse(raw, {
+    dynamicTyping: true,
+    skipEmptyLines: true
+  });
 
-const fusedTestData = fuse(testData.data);
-console.log('fused testData', fusedTestData);
+  return fuse(rows.data);
+}
+
+const data = parse(dataRaw);
+const epoch = parse(epochRaw);
 
 const mbDiv = select('div.mousebrain').node();
-
 const vis = new Mousebrain(mbDiv, {
-  data: fusedTestData,
+  channelData: data,
+  epochData: epoch,
   width: 960,
   height: 540
 });
