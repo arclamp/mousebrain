@@ -53,15 +53,20 @@ const vis = new Mousebrain(mbDiv, {
 });
 vis.render();
 
-const frameDiv = select('div.frame').node();
+const frameDiv = select('span.frame').node();
 const frameInput = new NumberInput(frameDiv, {
   frames: data.length
 });
 
-frameInput.on('frame', f => {
+const setFrame = f => {
+  frameInput.setValue(f);
+
   vis.setDrilldown(f);
   vis.render();
-});
+};
+
+frameInput.on('frame', setFrame);
+vis.epochVis.on('frame', setFrame);
 
 window.drill = (x) => {
   vis.setDrilldown(x);

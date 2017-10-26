@@ -13,13 +13,17 @@ export class NumberInput extends Events(VisComponent) {
         frames: options.frames
       }));
 
-    const input = select(this.el)
+    this.input = select(this.el)
       .select('input');
 
-    input.on('change', () => {
-      this.emit('frame', window.parseInt(input.property('value')));
+    this.input.on('change', () => {
+      this.emit('frame', window.parseInt(this.input.property('value')));
     });
   }
 
   render () {}
+
+  setValue (v) {
+    this.input.property('value', v);
+  }
 }

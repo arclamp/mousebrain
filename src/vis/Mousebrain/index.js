@@ -1,6 +1,8 @@
-import { select } from 'd3-selection';
+import { event,
+         select } from 'd3-selection';
 import { scaleOrdinal } from 'd3-scale';
 import { schemeDark2 } from 'd3-scale-chromatic';
+import Events from 'candela/plugins/mixin/Events';
 import VisComponent from 'candela/VisComponent';
 import LineChart from 'candela/plugins/vega/LineChart';
 
@@ -10,7 +12,7 @@ function clamp (val, low, high) {
   return val < low ? low : (val > high ? high : val);
 }
 
-class EpochChart extends VisComponent {
+class EpochChart extends Events(VisComponent) {
   constructor (el, options) {
     super(el);
 
@@ -27,13 +29,24 @@ class EpochChart extends VisComponent {
 
     // Initialize drilldown marker.
     this.drilldown = 0;
+
+    // Intercept clicks on the epoch view.
+    select(this.el)
+      .on('click', () => {
+        const x = event.x - this.el.offsetLeft;
+        this.emit('frame', Math.floor(x / this.getWidth() * this.frames));
+      });
   }
 
-  render () {
-    const width = select(this.el)
+  getWidth () {
+    return select(this.el)
       .node()
       .getBoundingClientRect()
       .width;
+  }
+
+  render () {
+    const width = this.getWidth();
 
     let sel = select(this.el)
       .selectAll('div.frac')
