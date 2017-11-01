@@ -8,6 +8,7 @@
     "data": "./venv/bin/python data/gendata.py -c 4 -f 50000 -e 8 -o data/mb",
     "data:small": "./venv/bin/python data/gendata.py -c 4 -f 1000 -e 8 -o data/small",
     "build": "webpack",
+    "build:lib": "webpack --config webpack-lib.config.js",
     "lint": "semistandard | snazzy",
     "watch": "webpack --watch",
     "serve": "cd build && ../venv/bin/python -m SimpleHTTPServer ${PORT-8000}"
