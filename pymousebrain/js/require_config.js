@@ -7,3 +7,9 @@ if (!window.__mousebrain_config) {
 
   window.__mousebrain_config = true;
 }
+
+require(['mousebrain'], function () {
+  window.mousebrain = {};
+}, function (error) {
+  element.append('<pre>' + error + '</pre>');
+});
