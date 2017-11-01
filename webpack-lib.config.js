@@ -7,22 +7,15 @@ var loaders = require('./loaders');
 module.exports = candelaPlugins({
   devtool: 'cheap-module-source-eval',
   entry: {
-    index: './src/index.js'
+    index: './src/vis/Mousebrain/index.js'
   },
   output: {
+    library: 'mousebrain',
+    libraryTarget: 'umd',
     path: path.resolve('build'),
-    filename: 'index.js'
+    filename: 'mousebrain.js'
   },
   module: {
     rules: loaders
-  },
-  plugins: [
-    new HtmlPlugin({
-      template: './src/index.template.ejs',
-      title: 'Mousebrain',
-      chunks: [
-        'index'
-      ]
-    })
-  ]
+  }
 });

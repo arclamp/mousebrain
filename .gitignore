@@ -1,6 +1,8 @@
 *.swp
+*.pyc
 data/*.csv
-venv
-build
-node_modules
+venv/
+build/
+node_modules/
+.ipynb_checkpoints/
 package-lock.json
