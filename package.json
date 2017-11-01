@@ -4,7 +4,7 @@
   "description": "Experiments in visualizing mouse brain traces using Candela and JupyterLab",
   "main": "index.js",
   "scripts": {
-    "virtualenv": "virtualenv venv",
+    "virtualenv": "virtualenv venv && ./venv/bin/pip install -r requirements.txt",
     "data": "./venv/bin/python data/gendata.py -c 4 -f 50000 -e 8 -o data/mb",
     "data:small": "./venv/bin/python data/gendata.py -c 4 -f 1000 -e 8 -o data/small",
     "build": "webpack",
