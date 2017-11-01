@@ -1,6 +1,3 @@
-require(['mousebrain'], function (mousebrain) {
-  element.append('<pre>hello, world</pre>');
-  console.log(mousebrain);
-}, function (error) {
+require(['mousebrain'], function () {}, function (error) {
   element.append('<pre>' + error + '</pre>');
 });

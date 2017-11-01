@@ -2,6 +2,7 @@ from IPython.display import display
 from IPython.display import publish_display_data
 import json
 import os
+from pandas import DataFrame
 
 curdir = os.path.dirname(os.path.join(os.path.abspath(os.getcwd()), __file__))
 
@@ -20,10 +21,16 @@ _init_js = load_js('init.js')
 
 _mousebrain_display_raw = load_js('mousebrain_display.js')
 def _mousebrain_display(options):
-    return _mousebrain_display_raw % (json.dumps(options))
+    return _mousebrain_display_raw % (json.dumps(options, cls=DataFrameEncoder))
 
 def init():
     publish_display_data({'application/javascript': _require_config + _init_js})
+
+class DataFrameEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, DataFrame):
+            return obj.to_dict(orient='records')
+        return json.JSONEncoder.default(self, obj)
 
 class Mousebrain(object):
     def __init__(self, **kwargs):
